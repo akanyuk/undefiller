@@ -1,4 +1,6 @@
-# zxboilerplate-example
+# undefiller
+
+A demo for Pentagon 128
 
 ## Необходимые инструменты
 * [git](https://git-scm.com/)
