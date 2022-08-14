@@ -15,7 +15,9 @@ A_PART_BALLS 	equ #7000
 	define P_PREBALLS 3 
 
 	; счетчики
-	define C_PART_BALLS_END 200
+	define C_PART_MINIBALLS1 3800
+	define C_PART_MINIBALLS2 4200
+	define C_PART_MINIBALLS3 4600
 
 	org #6000
 
@@ -38,43 +40,7 @@ page0s	module lib
 	call A_PART_TEXT
 
 	include "play_netted.asm"	
-
-	; part.preballs: depack
-	ld a, P_PREBALLS : call lib.SetPage
-	ld hl, A_PART_PREBALLS_PACKED
-	ld de, A_PART_PREBALLS
-	call lib.Depack
-
-	; part.preballs: play
-	ld b,32
-1	push bc
-	ld de, #4000
-	call A_PART_PREBALLS
-	halt
-	halt
-	halt
-	pop bc
-	djnz 1b
-
-	; part.balls: depack
-	ld a, P_BALLS : call lib.SetPage
-	ld hl, A_PART_BALLS_PACKED
-	ld de, A_PART_BALLS
-	call lib.Depack
-
-	; part.balls: main
-1	ld de, #4000
-	call A_PART_BALLS + 3
-	halt
-	halt
-	call A_PART_BALLS	
-	jr 1b
-
-	; ld de, C_PART_BALLS_END
-	; ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
-
-	xor a : out (#fe), a : call lib.SetScreenAttr
-	ld b, 50 : halt : djnz $ -1
+	include "play_balls.asm"	
 
 	jr $
 
