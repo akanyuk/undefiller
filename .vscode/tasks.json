@@ -1,0 +1,63 @@
+{
+        "version": "2.0.0",
+        "windows": {
+                "options": {
+                        "env": {
+                                "EMULATOR_BINARY": "unreal",
+                                "COPY_SNAPSHOT_TO": "C:\\bin\\UnrealSpeccy\\qsave3.sna"
+                        }
+                }
+        },
+        "linux": {
+                "options": {
+                        "env": {
+                                "EMULATOR_BINARY": "xpeccy",
+                                "COPY_SNAPSHOT_TO": "/tmp/quicksave.sna"
+                        }
+                }
+        },
+        "options": {
+                "cwd": "${workspaceFolder}"
+        },
+        "type": "shell",
+        "isBackground": false,
+        "presentation": {
+                "echo": false,
+                "reveal": "silent",
+                "focus": true,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+        },
+        "problemMatcher": "$errmatcher-sjasmplus",
+        "tasks": [
+                {
+                        "label": "build all",
+                        "command": "make",
+                        "group": {
+                                "kind": "build",
+                                "isDefault": true
+                        }
+                },
+                {
+                        "label": "part.text",
+                        "command": "make clean-part.text build/part.text.bin",
+                        "group": "build"
+                },
+                {
+                        "label": "part.netted",
+                        "command": "make clean-part.netted build/part.netted.bin",
+                        "group": "build"
+                },
+                {
+                        "label": "part.preballs",
+                        "command": "make clean-part.preballs build/part.preballs.bin",
+                        "group": "build"
+                },
+                {
+                        "label": "part.balls",
+                        "command": "make clean-part.balls build/part.balls.bin",
+                        "group": "build"
+                }
+        ]
+}

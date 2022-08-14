@@ -1,0 +1,459 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+fatal: not a git repository (or any of the parent directories): .git
+
+fatal: not a git repository (or any of the parent directories): .git
+
+# GNU Make 4.3
+ 
+# Built for x86_64-pc-cygwin
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+
+# Make data base, printed on Sun Aug 14 14:27:42 2022
+
+# Variables
+
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+# environment
+SYSTEMDRIVE = C:
+# environment
+LC_ALL = C
+# makefile (from 'Makefile', line 2)
+PROJECT_NAME = undefiller
+# environment
+USERPROFILE = C:\Users\nyuk
+# environment
+LOCALAPPDATA = C:\Users\nyuk\AppData\Local
+# environment
+VSCODE_CWD = C:\Program Files\Microsoft VS Code
+# environment
+CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
+# environment
+SYSTEMROOT = C:\WINDOWS
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_9032_DMOUZVBUKDHXCAND
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\nyuk\AppData\Roaming\Code\CachedData\6d9b74a70ca9c7733b29f0456fd8195364076dda
+# environment
+LANG = C
+# default
+.LOADED := 
+# environment
+TMP = /cygdrive/c/Temp
+# default
+.INCLUDE_DIRS = /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /cygdrive/d/zx-projects/undefiller
+# environment
+ 
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+PROGRAMFILES = C:\Program Files
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST := Makefile
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_PID = 9032
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+*F = $(notdir $*)
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-pc-cygwin
+# environment
+PROGRAMDATA = C:\ProgramData
+# default
+SHELL := /bin/sh
+# environment
+HOMEPATH = \Users\nyuk
+# default
+MAKECMDGOALS := all
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+COMSPEC = C:\WINDOWS\system32\cmd.exe
+# environment
+WINDIR = C:\WINDOWS
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /cygdrive/c/WINDOWS/system32:/cygdrive/c/WINDOWS:/cygdrive/c/WINDOWS/System32/Wbem:/cygdrive/c/WINDOWS/System32/WindowsPowerShell/v1.0:/cygdrive/c/WINDOWS/System32/OpenSSH:/cygdrive/c/Program Files/Intel/WiFi/bin:/cygdrive/c/Program Files/Common Files/Intel/WirelessCommon:/cygdrive/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/cygdrive/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/cygdrive/c/ProgramData/chocolatey/bin:/cygdrive/c/tools/php81:/cygdrive/c/ProgramData/ComposerSetup/bin:/cygdrive/c/Program Files/Microsoft VS Code/bin:/cygdrive/c/Program Files (x86)/Common Files/Adobe/AGL:/cygdrive/c/Program Files/Docker/Docker/resources/bin:/cygdrive/c/ProgramData/DockerDesktop/version-bin:/cygdrive/c/Program Files/Git/cmd:/cygdrive/c/Users/nyuk/AppData/Local/Microsoft/WindowsApps:/cygdrive/c/bin:/cygdrive/c/bin/unrealspeccy:/usr/bin:/cygdrive/c/Users/nyuk/AppData/Roaming/Composer/vendor/bin
+# environment
+COMPUTERNAME = X280
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# makefile (from 'Makefile', line 7)
+NAME_SUFFIX = $(shell date +%Y%m%d)-$(shell git log --format="%h" -n 1)
+# environment
+PROMPT = $P$G
+# environment
+CHOCOLATEYLASTPATHUPDATE = 133032595354779810
+# environment
+LOGONSERVER = \\X280
+# environment
+USERNAME = nyuk
+# environment
+COMMONPROGRAMFILES = C:\Program Files\Common Files
+# automatic
+?F = $(notdir $?)
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+# automatic
++F = $(notdir $+)
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERDOMAIN = X280
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+OS = Windows_NT
+# environment
+__COMPAT_LAYER = DetectorsAppHealth
+# makefile
+.DEFAULT_GOAL := all
+ 
+# default
+MAKE_VERSION := 4.3
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# environment
+!D: = d:\zx-projects\undefiller
+# environment
+USERDOMAIN_ROAMINGPROFILE = X280
+# environment
+NUMBER_OF_PROCESSORS = 8
+# environment
+PUBLIC = C:\Users\Public
+# environment
+MOZ_PLUGIN_PATH = C:\Program Files (x86)\Foxit Software\Foxit PDF Reader\plugins\
+# environment
+APPDATA = C:\Users\nyuk\AppData\Roaming
+# environment
+HOMEDRIVE = C:
+# environment
+PROCESSOR_ARCHITECTURE = AMD64
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/nyuk
+# makefile (from 'Makefile', line 5)
+PARTS = part.preballs part.balls
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# makefile (from 'Makefile', line 10)
+COPY_SNAPSHOT_TO = C:\Temp
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+TEMP = /cygdrive/c/Temp
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\d0e3d7ef4ff5a0e6eefb9c1c7e80dc16-1.70.1-main-sock
+# environment
+TERM = xterm-256color
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# default
+SUFFIXES := 
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+SESSIONNAME = Console
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink guile load
+# environment
+PROCESSOR_REVISION = 8e0a
+# environment
+CHOCOLATEYTOOLSLOCATION = C:\tools
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 142 Stepping 10, GenuineIntel
+# variable set hash-table stats:
+# Load=99/1024=10%, Rehash=0, Collisions=10/150=7%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# build (device 1861524681, inode 1970324837656920): 10 files, no impossibilities so far.
+# . (device 1861524681, inode 1970324837656919): 12 files, no impossibilities.
+ 
+
+# 22 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+build/%.bin.zx0: build/%.bin
+#  recipe to execute (from 'Makefile', line 34):
+	@printf "\033[32mBuilding '$@'\033[0m\n"
+	rm -f $@
+	zx0 $(subst .zx0,,$@)
+	
+	@printf "\033[32mdone\033[0m\n\n"
+
+build/%.bin: clean-%
+#  recipe to execute (from 'Makefile', line 42):
+	@printf "\033[32mCompiling '$(patsubst build/%.bin,%,$@)'\033[0m\n"
+	@echo $(subst part.,,$@)
+	@echo $@
+	mkdir -p build
+	sjasmplus --fullpath --color=off \
+		-DSNA_FILENAME=\"$(patsubst %.bin,%,$@)-$(NAME_SUFFIX).sna\" \
+		-DBIN_FILENAME=\"$@\" \
+		$(patsubst build/%.bin,%,$@)/main.asm
+	cp --force $(patsubst %.bin,%,$@)-$(NAME_SUFFIX).sna $(COPY_SNAPSHOT_TO)
+	@printf "\033[32mdone\033[0m\n\n"
+
+clean-%:
+#  recipe to execute (from 'Makefile', line 57):
+	rm -f build/$(subst clean-,,$@)*
+
+# 3 implicit rules, 0 (0.0%) terminal.
+# Files
+
+build/part.balls.bin.zx0: build/part.balls.bin
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'part.balls'
+#  Last modified 2022-08-14 13:59:52.0375063
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 34):
+	@printf "\033[32mBuilding '$@'\033[0m\n"
+	rm -f $@
+	zx0 $(subst .zx0,,$@)
+	
+	@printf "\033[32mdone\033[0m\n\n"
+
+build/part.balls.bin: clean-part.balls
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'part.balls'
+#  Last modified 2022-08-14 13:56:28.9221681
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 42):
+	@printf "\033[32mCompiling '$(patsubst build/%.bin,%,$@)'\033[0m\n"
+	@echo $(subst part.,,$@)
+	@echo $@
+	mkdir -p build
+	sjasmplus --fullpath --color=off \
+		-DSNA_FILENAME=\"$(patsubst %.bin,%,$@)-$(NAME_SUFFIX).sna\" \
+		-DBIN_FILENAME=\"$@\" \
+		$(patsubst build/%.bin,%,$@)/main.asm
+	cp --force $(patsubst %.bin,%,$@)-$(NAME_SUFFIX).sna $(COPY_SNAPSHOT_TO)
+	@printf "\033[32mdone\033[0m\n\n"
+
+ 
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-14 13:34:43.8849818
+#  File has been updated.
+#  Successfully updated.
+
+clean-part.preballs:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'part.preballs'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 57):
+	rm -f build/$(subst clean-,,$@)*
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 60):
+	rm -f build/*
+
+build/part.preballs.bin: clean-part.preballs
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'part.preballs'
+#  Last modified 2022-08-14 14:15:41.4836614
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 42):
+	@printf "\033[32mCompiling '$(patsubst build/%.bin,%,$@)'\033[0m\n"
+	@echo $(subst part.,,$@)
+	@echo $@
+	mkdir -p build
+	sjasmplus --fullpath --color=off \
+		-DSNA_FILENAME=\"$(patsubst %.bin,%,$@)-$(NAME_SUFFIX).sna\" \
+		-DBIN_FILENAME=\"$@\" \
+		$(patsubst build/%.bin,%,$@)/main.asm
+	cp --force $(patsubst %.bin,%,$@)-$(NAME_SUFFIX).sna $(COPY_SNAPSHOT_TO)
+	@printf "\033[32mdone\033[0m\n\n"
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+all: build
+#  Phony target (prerequisite of .PHONY).
+#  Command line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/22=0%
+
+help:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 63):
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-8s\033[0m %s\n", $$1, $$2}' 
+
+# 'override' directive
+build: .SHELLSTATUS := 128
+build: build/part.preballs.bin.zx0 build/part.balls.bin.zx0
+ 
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: ''
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := build
+# automatic
+# * := 
+# automatic
+# < := build/part.preballs.bin.zx0
+# automatic
+# + := build/part.preballs.bin.zx0 build/part.balls.bin.zx0
+# automatic
+# % := 
+# automatic
+# ^ := build/part.preballs.bin.zx0 build/part.balls.bin.zx0
+# automatic
+# ? := build/part.preballs.bin.zx0 build/part.balls.bin.zx0
+# automatic
+# | := 
+# variable set hash-table stats:
+# Load=9/32=28%, Rehash=0, Collisions=2/34=6%
+#  recipe to execute (from 'Makefile', line 18):
+	@printf "\033[32mBuilding '$(PROJECT_NAME)'\033[0m\n"
+	rm -f build/*.trd
+	rm -f build/*.tap
+	rm -f build/*.c
+	rm -f build/.bintap-out
+	sjasmplus --fullpath --color=off --inc=src/. \
+		-DSNA_FILENAME=\"build/$(PROJECT_NAME)-$(NAME_SUFFIX).sna\" \
+		-DTRD_FILENAME=\"build/$(PROJECT_NAME).trd\" \
+		src/main.asm
+	cp --force build/$(PROJECT_NAME)-$(NAME_SUFFIX).sna $(COPY_SNAPSHOT_TO)
+	@printf "\033[32mDone\033[0m\n"
+
+clean-part.balls:
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'part.balls'
+#  File is an intermediate prerequisite.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 57):
+	rm -f build/$(subst clean-,,$@)*
+
+clean-%:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+build/part.preballs.bin.zx0: build/part.preballs.bin
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'part.preballs'
+#  Last modified 2022-08-14 14:16:33.4248647
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 34):
+	@printf "\033[32mBuilding '$@'\033[0m\n"
+	rm -f $@
+	zx0 $(subst .zx0,,$@)
+	
+	@printf "\033[32mdone\033[0m\n\n"
+
+ 
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: all build clean clean-% help
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=15/1024=1%, Rehash=0, Collisions=3/58=5%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 36 / storage = 440 B / avg = 12 B
+# current buf: size = 8162 B / used = 440 B / count = 36 / avg = 12 B
+
+# strcache performance: lookups = 71 / hit rate = 49%
+# hash-table stats:
+# Load=36/8192=0%, Rehash=0, Collisions=2/71=3%
+# Finished Make data base on Sun Aug 14 14:27:42 2022
+
+ 

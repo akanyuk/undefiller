@@ -1,0 +1,16 @@
+00aa 01
+00ca 1c
+01aa 07
+01ab fe
+01ca 18
+02aa 0f
+02ab fc
+02ca 10
+03aa 1f
+03ab f0
+04aa 0f
+04ab e0
+05aa 07
+05ab 80
+06aa 07
+07aa 0e
