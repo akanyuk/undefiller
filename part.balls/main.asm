@@ -1,5 +1,7 @@
 	device zxspectrum128
 
+	page 0
+	
 	define _DEBUG_ 1
 
 	define A_PART_BALLS #7000
@@ -29,9 +31,12 @@ start
 	ld hl,playBallsCycle
 	call interrStart
 
-	ld a,%01000010 : call A_PART_BALLS + 9
-	ld a,%01000011 : call A_PART_BALLS + 9
+	; ld a,%01000010 : call A_PART_BALLS + 9
+	; ld a,%01000011 : call A_PART_BALLS + 9
 	ld a,%01000111 : call A_PART_BALLS + 9
+
+	call interrStop
+	call A_PART_BALLS + 12
 
 	di : halt
 

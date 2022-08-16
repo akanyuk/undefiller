@@ -6,16 +6,16 @@
 	define _MUSIC_ 1
 
 	; адресa частей
-A_PART_NETTED	equ #7000
 A_PART_BALLS 	equ #7000
 
 	define P_TRACK 1 ; трек и плеер лежат здесь
 	define P_BALLS 3 
 
 	; счетчики
-	define C_PART_MINIBALLS1 3800
-	define C_PART_MINIBALLS2 4100
-	define C_PART_MINIBALLS3 4400
+	define C_MINIBALLS1 3800
+	define C_MINIBALLS2 4100
+	define C_MINIBALLS3 4400
+	define C_AFTER_BALLS 4600
 
 	org #6000
 
@@ -111,11 +111,7 @@ INTS_COUNTER	equ $+1
 	ret
 
 A_PART_TEXT	include "part.text/part.asm"
-
-	display /d, '[page 0] bytes before overlap at #7000: ', #7000 - $
-
-	org A_PART_NETTED
-	include "part.netted/part.asm"
+A_PART_NETTED	include "part.netted/part.asm"
 
 page0e	display /d, '[page 0] free: ', #ffff - $, ' (', $, ')'	
 

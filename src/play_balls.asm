@@ -19,14 +19,19 @@
 	ld hl,playBallsCycle
 	call interrStart
 
-1	ld de, C_PART_MINIBALLS1 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
+1	ld de, C_MINIBALLS1 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
 	ld a,%01000010 : call A_PART_BALLS + 9
 
-1	ld de, C_PART_MINIBALLS2 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
+1	ld de, C_MINIBALLS2 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
 	ld a,%01000011 : call A_PART_BALLS + 9
 
-1	ld de, C_PART_MINIBALLS3 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
+1	ld de, C_MINIBALLS3 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
 	ld a,%01000111 : call A_PART_BALLS + 9
+
+1	ld de, C_AFTER_BALLS : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
+
+	call interrStop
+	call A_PART_BALLS + 12
 
 	jr playBallsDone
 
