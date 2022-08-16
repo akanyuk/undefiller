@@ -7,7 +7,7 @@ SCR_HIGHT      	equ 4 ; Старший байт адреса вывода фре
 
 ; b: количество кубов	
 ; iy: настройки кубов
-PlayCubes	ld de, miniballs.CUBE_DATA_LEN
+PlayCubes	ld de, CUBE_DATA_LEN
 2	push bc
 	push de
 	call PlayCube

@@ -61,5 +61,111 @@ _b1	rra
 	ret nc
 	ret
 
-Depack	include "dzx0_standard.asm"
+	; Binary preparing:
+	; ZX-Paintbrush -> Export -> Binary files (*.bin)
+	;
+	; HL: binary addres
+DispBinOnInterrupts	
+	ld (.movePixels+1),hl
+	ld de,#1800
+	add hl,de
+	ld (.moveAttrs+1),hl
+
+	ld hl,#4000 : ld(.movePixels+4),hl
+	ld hl,#5800 : ld(.moveAttrs+4),hl
+	
+	ld b,24
+.loop	push bc
+
+.movePixels	ld hl,#0000
+	ld de,#4000
+
+	ld a,8
+1	push af
+	push de
+	ld bc,#0020
+	ldir
+	pop de
+	call lib.DownDE
+	pop af
+	dec a : jr nz,1b
+	ld (.movePixels+1),hl
+	ld (.movePixels+4),de
+
+.moveAttrs	ld hl,#0000
+	ld de,#5800
+	ld bc,#0020
+	ldir
+	ld (.moveAttrs+1),hl
+	ld (.moveAttrs+4),de
+
+	halt
+	pop bc
+	djnz .loop
+	ret
+
+FadeScreenOnInterrupts
+	ld hl,#5800
+	ld de,#5801
+	ld a,#20
+1	ld bc,#0020
+	ld (hl),0
+	ldir
+	halt
+	dec a : jr nz, 1b
+	jp ClearScreen
+
+PrintCursor	ld a,">"
+	call PrintChar_8x8
+	ld a,"_"
+	; jp PrintChar_8x8
+
+; Print one char with ROM font
+; DE - Screen memory address
+; A  - char
+PrintChar_8x8 	push hl, de, bc
+	sub #1f
+	ld hl, #3d00 - #08
+	ld bc, #08
+1	add hl, bc
+	dec a
+	jr nz, 1b
+
+	dup 8 
+	ld a,(hl) : ld (de),a		; normal
+	inc d : inc l
+	edup 
+
+	pop bc, de, hl
+	inc hl : inc de
+	ret 
+
+; Print one char with ROM font
+; DE - Screen memory address
+; A  - char
+PrintChar_8x8B 	push hl, de, bc
+	sub #1f
+	ld hl, #3d00 - #08
+	ld bc, #08
+1	add hl, bc
+	dec a
+	jr nz, 1b
+
+	dup 8 
+	ld a,(hl) : ld b, a : rla : or b : ld (de), a   ; bold
+	inc d : inc l
+	edup 
+
+	pop bc, de, hl
+	inc hl : inc de
+	ret 
+
+	; Printing CPU phrase
+PrintCpu 	ld a, (hl)
+	or a : ret z
+	call lib.PrintChar_8x8B
+	halt
+	jr PrintCpu
+
+Depack	include "dzx0_fast.asm"
 _start

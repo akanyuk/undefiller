@@ -6,18 +6,17 @@
 	define _MUSIC_ 1
 
 	; адресa частей
-A_PART_NETTED	equ #7000
-A_PART_PREBALLS equ #7000
 A_PART_BALLS 	equ #7000
-
+	define P_INTRO 1 ; "OUTSIDERS" intro
 	define P_TRACK 1 ; трек и плеер лежат здесь
+	define P_START_SCR 7
 	define P_BALLS 3 
-	define P_PREBALLS 3 
 
 	; счетчики
-	define C_PART_MINIBALLS1 3800
-	define C_PART_MINIBALLS2 4200
-	define C_PART_MINIBALLS3 4600
+	define C_MINIBALLS1 4500
+	define C_MINIBALLS2 4700
+	define C_MINIBALLS3 4900
+	define C_AFTER_BALLS 5100
 
 	org #6000
 
@@ -27,38 +26,45 @@ page0s	module lib
 
 	di : ld sp, page0s
 	xor a : out (#fe), a 
-	call lib.ClearScreen
+	call lib.SetScreenAttr
 	ld a,#5c : ld i,a : ld hl,interr : ld (#5cff),hl : im 2 : ei
 
-	ld a,#44 : call lib.SetScreenAttr
+	include "play_intro.asm"
+
+	ld a, P_START_SCR : call lib.SetPage
+	ld hl,START_SCR
+	call lib.DispBinOnInterrupts
 
 	call musicStart
 	xor a : call lib.SetPage
 
-	ld b,250 : halt : djnz $-1
+	ld b,180 : halt : djnz $-1
+	call lib.FadeScreenOnInterrupts
+
+	call lib.ClearScreen
+	ld a,#44 : call lib.SetScreenAttr
 
 	call A_PART_TEXT
+	ld b,20 : halt : djnz $-1
 
 	include "play_netted.asm"	
+	
 	include "play_balls.asm"	
 
-	jr $
+	ld b,200 : halt : djnz $-1
 
-musicStop	ifdef _MUSIC_
+	; STOP HERE
+	ifdef _MUSIC_
 	ld a, P_TRACK : call lib.SetPage
 	call PT3PLAY + 8
 	xor a : ld (MUSIC_STATE), a
 	endif
-	ret
+
+	jr $
+
 musicStart	ifdef _MUSIC_
 	ld a, P_TRACK : call lib.SetPage
 	call PT3PLAY
-	ld a, #01 : ld (MUSIC_STATE), a
-	endif
-	ret
-
-musicStartWoInit
-	ifdef _MUSIC_	
 	ld a, #01 : ld (MUSIC_STATE), a
 	endif
 	ret
@@ -115,24 +121,25 @@ INTS_COUNTER	equ $+1
 	ret
 
 A_PART_TEXT	include "part.text/part.asm"
-
-	display /d, '[page 0] bytes before overlap at #7000: ', #7000 - $
-
-	org A_PART_NETTED
-	include "part.netted/part.asm"
+A_PART_NETTED	include "part.netted/part.asm"
 
 page0e	display /d, '[page 0] free: ', #ffff - $, ' (', $, ')'	
 
 	define _page1 : page 1 : org #c000
 page1s	
+A_PART_INTRO	include "part.intro/part.intro.asm"
 PT3PLAY	include "lib/PTxPlay.asm"
 	incbin "res/nq-ATE-not-used.pt3"
 page1e	display /d, '[page 1] free: ', 65536 - $, ' (', $, ')'
 
 	define _page3 : page 3 : org #c000
 page3s	
-A_PART_PREBALLS_PACKED	incbin "build/part.preballs.bin.zx0"
 A_PART_BALLS_PACKED	incbin "build/part.balls.bin.zx0"
 page3e	display /d, '[page 3] free: ', 65536 - $, ' (', $, ')'
+
+	define _page7 : page 7 : org #c000
+page7s	
+START_SCR	incbin "res/retroPC.bin"
+page7e	display /d, '[page 7] free: ', 65536 - $, ' (', $, ')'
 
 	include "src/builder.asm"

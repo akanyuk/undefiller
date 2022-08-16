@@ -37,6 +37,11 @@
                         "group": "build"
                 },
                 {
+                        "label": "part.intro",
+                        "command": "make clean-part.intro build/part.intro.bin",
+                        "group": "build"
+                },
+                {
                         "label": "part.text",
                         "command": "make clean-part.text build/part.text.bin",
                         "group": "build"
@@ -44,11 +49,6 @@
                 {
                         "label": "part.netted",
                         "command": "make clean-part.netted build/part.netted.bin",
-                        "group": "build"
-                },
-                {
-                        "label": "part.preballs",
-                        "command": "make clean-part.preballs build/part.preballs.bin",
                         "group": "build"
                 },
                 {
