@@ -49,15 +49,15 @@
                 {
                         "label": "part.preballs",
                         "command": "make clean-part.preballs build/part.preballs.bin",
-                        "group": {
-                                "kind": "build",
-                                "isDefault": true
-                        }
+                        "group": "build"
                 },
                 {
                         "label": "part.balls",
                         "command": "make clean-part.balls build/part.balls.bin",
-                        "group": "build"
+                        "group": {
+                                "kind": "build",
+                                "isDefault": true
+                        }
                 }
         ]
 }

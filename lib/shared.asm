@@ -61,5 +61,5 @@ _b1	rra
 	ret nc
 	ret
 
-Depack	include "dzx0_standard.asm"
+Depack	include "dzx0_fast.asm"
 _start

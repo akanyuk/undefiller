@@ -7,7 +7,7 @@
 
 	; адресa частей
 A_PART_NETTED	equ #7000
-A_PART_PREBALLS equ #7000
+A_PART_PREBALLS 	equ #7000
 A_PART_BALLS 	equ #7000
 
 	define P_TRACK 1 ; трек и плеер лежат здесь
@@ -36,9 +36,7 @@ page0s	module lib
 	xor a : call lib.SetPage
 
 	ld b,250 : halt : djnz $-1
-
 	call A_PART_TEXT
-
 	include "play_netted.asm"	
 	include "play_balls.asm"	
 
