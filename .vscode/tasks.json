@@ -34,10 +34,7 @@
                 {
                         "label": "build all",
                         "command": "make",
-                        "group": {
-                                "kind": "build",
-                                "isDefault": true
-                        }
+                        "group": "build"
                 },
                 {
                         "label": "part.text",
@@ -58,6 +55,14 @@
                         "label": "part.balls",
                         "command": "make clean-part.balls build/part.balls.bin",
                         "group": "build"
+                },
+                {
+                        "label": "part.greets",
+                        "command": "make clean-part.greets build/part.greets.bin",
+                        "group": {
+                                "kind": "build",
+                                "isDefault": true
+                        }
                 }
         ]
 }
