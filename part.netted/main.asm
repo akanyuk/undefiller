@@ -13,14 +13,30 @@ start
 	xor a : out #fe, a
 	ld a,#5c, i,a, hl,interr, (#5cff),hl : im 2 : ei
 
-.main	
-	ld bc,#0241 : call nettedCycle
-	ld bc,#0242 : call nettedCycle
-	ld bc,#0243 : call nettedCycle
-	ld bc,#0204 : call nettedCycle
+	; blink 'UNDEFINED'
+	call A_PART_NETTED + 15
 
-	ld bc,#0146 : call nettedCycle
-	ld bc,#0146 : call nettedCycle
+	; initial screen
+	call A_PART_NETTED + 12
+
+	ld b,60 : halt : djnz $-1
+
+	ld a,#02 : call nettedCycle
+	
+	call lib.ClearScreen
+
+	ld a,#02 : call nettedCycle
+
+	ld a,#42 : call lib.SetScreenAttr
+	ld a,#02 : call nettedCycle
+
+	ld a,#41 : call lib.SetScreenAttr
+	ld a,#02 : call nettedCycle
+
+	ld a,#46 : call lib.SetScreenAttr
+
+	ld a,#01 : call nettedCycle
+	ld a,#01 : call nettedCycle
 
 	ld b, 32
 1	push bc
@@ -28,8 +44,8 @@ start
 	pop bc
 	djnz 1b
 
-	ld bc,#0146 : call nettedCycle
-	ld bc,#0146 : call nettedCycle
+	ld a,#01 : call nettedCycle
+	ld a,#01 : call nettedCycle
 
 	ld b, 32
 1	push bc
@@ -37,15 +53,13 @@ start
 	pop bc
 	djnz 1b
 
-	ld bc,#0146 : call nettedCycle
-	ld bc,#0146 : call nettedCycle
+	ld a,#01 : call nettedCycle
+	ld a,#01 : call nettedCycle
 
 	jr $
 
-	; b - speed (1 - fast, 2 - normal)
-	; c - color
-nettedCycle	ld a,b : ld (.spd+1),a
-	ld a,c : call lib.SetScreenAttr
+	; a - speed (1 - fast, 2 - normal)
+nettedCycle	ld (.spd+1),a
 	ld b,64
 1	push bc
 	ld de,#4000 
@@ -70,6 +84,9 @@ interr	di
 	pop iy,ix,hl,de,bc,af
 	ei
 	ret
+
+	org #4000
+	incbin "wip/before.scr"
 
 	org A_PART_NETTED
 	include "part.asm"

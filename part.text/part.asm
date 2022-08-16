@@ -74,9 +74,9 @@
 
 	ld de,#5080 : call PrintCursor
 
-	ld b,200 : halt : djnz $-1
+	ld b,150 : halt : djnz $-1
 
-	; begin clean
+	; begin slow clean
 	ld hl,#5800
 	ld de,#5801
 	ld (hl),0
@@ -98,24 +98,47 @@
 	ld (hl),0
 	ldir
 
-	ld b,100 : halt : djnz $-1
+	; really cleanup
+	ld hl,#4000
+	ld de,#4001
+	ld bc,#07ff
+	ld (hl),l
+	ldir
 
-	; continue clean
-	halt
-	xor a : call lib.SetScreenAttr
-	call lib.ClearScreen
-	ld a,#44 : call lib.SetScreenAttr
-	
-	; restoring "UNDEFINED"
-	ld hl,TEXT2
-	ld de,#4880 
-1 	ld a, (hl)
-	or a : jr z, 1f
+	ld hl,#5000
+	ld de,#5001
+	ld bc,#07ff
+	ld (hl),l
+	ldir
+
+	ld de,#4840 
+	ld b,9
+1	push bc
+	ld a, " "
+	call PrintChar_8x8
+	pop bc
+	djnz 1b
+
+	ld de,#48e0 
+	ld b,16
+1	push bc
+	ld a, " "
+	call PrintChar_8x8
+	pop bc
+	djnz 1b
+
+	ld b,50 : halt : djnz $-1
+
+	;  removing "chaos constructions"
+	ld de,#484a
+	ld b,21
+1	push bc
+	ld a, " "
 	call PrintChar_8x8B
-	jr 1b
-1
+	pop bc
+	djnz 1b
 
-	ld b,200 : halt : djnz $-1
+	ld a,#44 : call lib.SetScreenAttr
 
 	ret
 

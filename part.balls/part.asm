@@ -1,34 +1,24 @@
+	jp preBalls
 	jp NextFrame
-	jp DisplayFrame ; $+3 play frame 
+	jp DisplayFrame 
+	jp miniBalls
 
-	; $+6 miniballs
-	module transition
-	include "miniballs/transition.asm"
-	endmodule	
+	; screen after balls
+	ld hl,AFTER_SCR
+	jp lib.dispBinScrWithHalts
+AFTER_SCR	incbin "res/afterballs.scr.bin"
 
-	module miniballs
+
+preBalls	module preballs
+	call DisplayFrame
+	jr NextFrame
+	include "preballs/player.asm"
+	endmodule
+
+miniBalls	module miniballs
+	include "miniballs/miniballs.asm"
 	include "miniballs/miniballs_player.asm"
 	endmodule
 
-	include "player.asm"
-
-; a: Цвет
-; b: Количество знакомест по горизонтали
-; c: Количество знакомест по вертикали
-; hl: Адрес начала атрибутной области
-SetColor	ld de, #0020
-1	push bc
-	push hl
-2	ld (hl), a
-	inc hl
-	djnz 2b
-	ex af, af'    
-	pop hl
-	add hl, de
-	pop bc
-	dec c
-	ld a, c : or a 
-	ret z
-	ex af, af'
-	jr 1b
-	ret
+	; balls player
+	include "balls/player.asm"

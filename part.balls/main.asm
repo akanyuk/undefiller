@@ -1,5 +1,7 @@
 	device zxspectrum128
 
+	page 0
+	
 	define _DEBUG_ 1
 
 	define A_PART_BALLS #7000
@@ -17,19 +19,33 @@ start
 
 	ld a,#46 : call lib.SetScreenAttr
 
-                ; Play balls on interrupts
-                ld hl,playBallsCycle
-                call interrStart
+	ld b,32
+.preballsCycle	push bc
+	ld de, #4000
+	call A_PART_BALLS
+	halt
+	pop bc
+	djnz .preballsCycle
 
-	call A_PART_BALLS + 6
+	; Play balls on interrupts
+	ld hl,playBallsCycle
+	call interrStart
+
+	; ld a,%01000010 : call A_PART_BALLS + 9
+	; ld a,%01000011 : call A_PART_BALLS + 9
+	ld a,%01000111 : call A_PART_BALLS + 9
+
+	call interrStop
+	call A_PART_BALLS + 12
+
 	di : halt
 
 playBallsCycle	ld a,#00
-                inc a : and #01 : ld(playBallsCycle+1),a
-                or a : ret z
-                ld de, #4000
-	call A_PART_BALLS + 3
-	jp A_PART_BALLS	
+	inc a : and #01 : ld(playBallsCycle+1),a
+	or a : ret z
+	ld de, #4000
+	call A_PART_BALLS + 6
+	jp A_PART_BALLS + 3
 
 	; запуск нужной процедуры на прерываниях
 	; HL - адрес процедура
