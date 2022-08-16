@@ -13,11 +13,18 @@ start
 	xor a : out #fe, a
 	ld a,#5c, i,a, hl,interr, (#5cff),hl : im 2 : ei
 
+	; blink 'UNDEFINED'
+	call A_PART_NETTED + 15
+
+	; initial screen
+	call A_PART_NETTED + 12
+
+	ld b,50 : halt : djnz $-1
+
 .main	
-	ld bc,#0241 : call nettedCycle
-	ld bc,#0242 : call nettedCycle
+	ld bc,#0244 : call nettedCycle
 	ld bc,#0243 : call nettedCycle
-	ld bc,#0204 : call nettedCycle
+	ld bc,#0242 : call nettedCycle
 
 	ld bc,#0146 : call nettedCycle
 	ld bc,#0146 : call nettedCycle
@@ -70,6 +77,9 @@ interr	di
 	pop iy,ix,hl,de,bc,af
 	ei
 	ret
+
+	org #4000
+	incbin "wip/before.scr"
 
 	org A_PART_NETTED
 	include "part.asm"

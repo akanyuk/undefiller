@@ -65,12 +65,13 @@ _b1	rra
 	; ZX-Paintbrush -> Export -> Binary files (*.bin)
 	;
 	; HL: binary addres
-dispBinScrWithHalts	push hl
+dispBinScrWithHalts	ld (.movePixels+1),hl
 	ld de,#1800
 	add hl,de
 	ld (.moveAttrs+1),hl
-	pop hl
-	ld (.movePixels+1),hl
+
+	ld hl,#4000 : ld(.movePixels+4),hl
+	ld hl,#5800 : ld(.moveAttrs+4),hl
 	
 	ld b,24
 .loop	push bc

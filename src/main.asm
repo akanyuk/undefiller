@@ -9,6 +9,7 @@
 A_PART_BALLS 	equ #7000
 
 	define P_TRACK 1 ; трек и плеер лежат здесь
+	define P_START_SCR 7
 	define P_BALLS 3 
 
 	; счетчики
@@ -28,33 +29,38 @@ page0s	module lib
 	call lib.ClearScreen
 	ld a,#5c : ld i,a : ld hl,interr : ld (#5cff),hl : im 2 : ei
 
-	ld a,#44 : call lib.SetScreenAttr
+	ld a, P_START_SCR : call lib.SetPage
+	ld hl,START_SCR
+	call lib.dispBinScrWithHalts
 
 	call musicStart
 	xor a : call lib.SetPage
 
-	ld b,250 : halt : djnz $-1
+	ld b,200 : halt : djnz $-1
+	include "play_remove_start_scr.asm"
+
+	call lib.ClearScreen
+	ld a,#44 : call lib.SetScreenAttr
+
 	call A_PART_TEXT
+	ld b,50 : halt : djnz $-1
 	include "play_netted.asm"	
 	include "play_balls.asm"	
 
-	jr $
+	ld b,200 : halt : djnz $-1
 
-musicStop	ifdef _MUSIC_
+	; STOP HERE
+	ifdef _MUSIC_
 	ld a, P_TRACK : call lib.SetPage
 	call PT3PLAY + 8
 	xor a : ld (MUSIC_STATE), a
 	endif
-	ret
+
+	jr $
+
 musicStart	ifdef _MUSIC_
 	ld a, P_TRACK : call lib.SetPage
 	call PT3PLAY
-	ld a, #01 : ld (MUSIC_STATE), a
-	endif
-	ret
-
-musicStartWoInit
-	ifdef _MUSIC_	
 	ld a, #01 : ld (MUSIC_STATE), a
 	endif
 	ret
@@ -125,5 +131,10 @@ page1e	display /d, '[page 1] free: ', 65536 - $, ' (', $, ')'
 page3s	
 A_PART_BALLS_PACKED	incbin "build/part.balls.bin.zx0"
 page3e	display /d, '[page 3] free: ', 65536 - $, ' (', $, ')'
+
+	define _page7 : page 7 : org #c000
+page7s	
+START_SCR	incbin "res/start_scr.bin"
+page7e	display /d, '[page 7] free: ', 65536 - $, ' (', $, ')'
 
 	include "src/builder.asm"
