@@ -7,16 +7,16 @@
 
 	; адресa частей
 A_PART_BALLS 	equ #7000
-
+	define P_INTRO 1 ; "OUTSIDERS" intro
 	define P_TRACK 1 ; трек и плеер лежат здесь
 	define P_START_SCR 7
 	define P_BALLS 3 
 
 	; счетчики
-	define C_MINIBALLS1 3800
-	define C_MINIBALLS2 4100
-	define C_MINIBALLS3 4400
-	define C_AFTER_BALLS 4600
+	define C_MINIBALLS1 4500
+	define C_MINIBALLS2 4700
+	define C_MINIBALLS3 4900
+	define C_AFTER_BALLS 5100
 
 	org #6000
 
@@ -26,8 +26,10 @@ page0s	module lib
 
 	di : ld sp, page0s
 	xor a : out (#fe), a 
-	call lib.ClearScreen
+	call lib.SetScreenAttr
 	ld a,#5c : ld i,a : ld hl,interr : ld (#5cff),hl : im 2 : ei
+
+	include "play_intro.asm"
 
 	ld a, P_START_SCR : call lib.SetPage
 	ld hl,START_SCR
@@ -36,15 +38,17 @@ page0s	module lib
 	call musicStart
 	xor a : call lib.SetPage
 
-	ld b,200 : halt : djnz $-1
-	include "play_remove_start_scr.asm"
+	ld b,180 : halt : djnz $-1
+	call lib.fadeScreenOnInterrupts
 
 	call lib.ClearScreen
 	ld a,#44 : call lib.SetScreenAttr
 
 	call A_PART_TEXT
-	ld b,50 : halt : djnz $-1
+	ld b,20 : halt : djnz $-1
+
 	include "play_netted.asm"	
+	
 	include "play_balls.asm"	
 
 	ld b,200 : halt : djnz $-1
@@ -123,6 +127,7 @@ page0e	display /d, '[page 0] free: ', #ffff - $, ' (', $, ')'
 
 	define _page1 : page 1 : org #c000
 page1s	
+A_PART_INTRO	include "part.intro/part.intro.asm"
 PT3PLAY	include "lib/PTxPlay.asm"
 	incbin "res/nq-ATE-not-used.pt3"
 page1e	display /d, '[page 1] free: ', 65536 - $, ' (', $, ')'

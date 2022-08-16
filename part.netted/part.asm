@@ -70,6 +70,8 @@ screenReplace	ld hl,UD_LOGO
 	pop af
 	dec a : jr nz,1b
 
+	ld b,50 : halt : djnz $-1
+	
 	ld hl,BEFORE_SCR
 	jp lib.dispBinScrWithHalts
 BEFORE_SCR	incbin "res/start_scr.bin"

@@ -40,6 +40,11 @@
                         }
                 },
                 {
+                        "label": "part.intro",
+                        "command": "make clean-part.intro build/part.intro.bin",
+                        "group": "build"
+                },
+                {
                         "label": "part.text",
                         "command": "make clean-part.text build/part.text.bin",
                         "group": "build"
