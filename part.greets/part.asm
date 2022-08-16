@@ -1,4 +1,52 @@
-	ld de, #4000
+	jp preImage
+	jp main
+	; postImage
+
+screenReplace	ld b,32
+.loop	push bc
+.movePixels	ld hl,POST_SCR
+	ld de,#4000
+
+	ld a,192
+	ld bc,#0020
+	push hl
+	push de
+1	push af
+	ld a,(hl) : ld(de),a
+	call lib.DownDE
+	add hl,bc
+	pop af : dec a : jr nz,1b
+	pop de : inc de : ld (.movePixels+4),de
+	pop hl : inc hl : ld (.movePixels+1),hl	
+
+.moveAttrs	ld hl,POST_SCR+#1800
+	ld de,#5800
+	
+	ld a,24
+	ld bc,#001f
+	push hl
+	push de	
+1	push af
+	ldi : inc bc
+	add hl,bc
+	ex de,hl : add hl,bc : ex de,hl
+	pop af : dec a : jr nz,1b
+	pop de : inc de : ld (.moveAttrs+4),de
+	pop hl : inc hl : ld (.moveAttrs+1),hl	
+
+	halt
+	pop bc
+	djnz .loop
+	ret
+POST_SCR	incbin "res/multipass.bin"
+
+preImage
+	; screen after balls
+	ld hl,PRE_SCR
+	jp lib.DispBinOnInterrupts
+PRE_SCR	incbin "res/amiga.bin"
+
+main	ld de, #4000
 
 	ld hl, GREETS
 	ld b,8

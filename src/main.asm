@@ -4,13 +4,17 @@
 
 	; define _DEBUG_ 1
 	define _MUSIC_ 1
+	define _INTRO_ 1
 
 	; адресa частей
 A_PART_BALLS 	equ #7000
+A_PART_GREETS 	equ #7000
+
 	define P_INTRO 1 ; "OUTSIDERS" intro
 	define P_TRACK 1 ; трек и плеер лежат здесь
 	define P_START_SCR 7
 	define P_BALLS 3 
+	define P_GREETS 7
 
 	; счетчики
 	define C_MINIBALLS1 4500
@@ -29,7 +33,9 @@ page0s	module lib
 	call lib.SetScreenAttr
 	ld a,#5c : ld i,a : ld hl,interr : ld (#5cff),hl : im 2 : ei
 
+	ifdef _INTRO_
 	include "play_intro.asm"
+	endif 
 
 	ld a, P_START_SCR : call lib.SetPage
 	ld hl,START_SCR
@@ -48,8 +54,8 @@ page0s	module lib
 	ld b,20 : halt : djnz $-1
 
 	include "play_netted.asm"	
-	
 	include "play_balls.asm"	
+	include "play_greets.asm"	
 
 	ld b,200 : halt : djnz $-1
 
@@ -134,12 +140,15 @@ page1e	display /d, '[page 1] free: ', 65536 - $, ' (', $, ')'
 
 	define _page3 : page 3 : org #c000
 page3s	
-A_PART_BALLS_PACKED	incbin "build/part.balls.bin.zx0"
+A_PART_BALLS_PACKED
+	incbin "build/part.balls.bin.zx0"
 page3e	display /d, '[page 3] free: ', 65536 - $, ' (', $, ')'
 
 	define _page7 : page 7 : org #c000
 page7s	
 START_SCR	incbin "res/retroPC.bin"
+A_PART_GREETS_PACKED
+	incbin "build/part.greets.bin.zx0"
 page7e	display /d, '[page 7] free: ', 65536 - $, ' (', $, ')'
 
 	include "src/builder.asm"

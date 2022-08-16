@@ -82,7 +82,7 @@ screenReplace	ld b,32
 	push hl
 	push de	
 1	push af
-	ldi
+	ldi : inc bc
 	add hl,bc
 	ex de,hl : add hl,bc : ex de,hl
 	pop af : dec a : jr nz,1b

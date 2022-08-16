@@ -36,8 +36,6 @@ start
 	ld a,%01000111 : call A_PART_BALLS + 9
 
 	call interrStop
-	call A_PART_BALLS + 12
-
 	di : halt
 
 playBallsCycle	ld a,#00

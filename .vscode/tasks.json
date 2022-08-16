@@ -34,7 +34,10 @@
                 {
                         "label": "build all",
                         "command": "make",
-                        "group": "build"
+                        "group": {
+                                "kind": "build",
+                                "isDefault": true
+                        }
                 },
                 {
                         "label": "part.intro",
@@ -59,10 +62,7 @@
                 {
                         "label": "part.greets",
                         "command": "make clean-part.greets build/part.greets.bin",
-                        "group": {
-                                "kind": "build",
-                                "isDefault": true
-                        }
+                        "group": "build"
                 }
         ]
 }

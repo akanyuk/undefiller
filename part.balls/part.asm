@@ -1,23 +1,17 @@
 	jp preBalls
 	jp NextFrame
 	jp DisplayFrame 
-	jp miniBalls
 
-	; screen after balls
-	ld hl,AFTER_SCR
-	jp lib.DispBinOnInterrupts
-AFTER_SCR	incbin "res/afterballs.scr.bin"
-
+	; miniballs
+miniBalls	module miniballs
+	include "miniballs/miniballs.asm"
+	include "miniballs/miniballs_player.asm"
+	endmodule
 
 preBalls	module preballs
 	call DisplayFrame
 	jr NextFrame
 	include "preballs/player.asm"
-	endmodule
-
-miniBalls	module miniballs
-	include "miniballs/miniballs.asm"
-	include "miniballs/miniballs_player.asm"
 	endmodule
 
 	; balls player

@@ -31,8 +31,6 @@
 1	ld de, C_AFTER_BALLS : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
 
 	call interrStop
-	call A_PART_BALLS + 12
-
 	jr playBallsDone
 
 	; part.balls: main
