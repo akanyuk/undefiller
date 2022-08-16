@@ -5,7 +5,7 @@
 	call lib.Depack
 
 	call A_PART_GREETS
-                ld b,200 : halt : djnz $-1
+                ld b,255 : halt : djnz $-1
 
 	call lib.FadeScreenOnInterrupts
 	ld a,#44 : call lib.SetScreenAttr
