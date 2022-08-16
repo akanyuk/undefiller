@@ -7,17 +7,15 @@
 
 	; адресa частей
 A_PART_NETTED	equ #7000
-A_PART_PREBALLS 	equ #7000
 A_PART_BALLS 	equ #7000
 
 	define P_TRACK 1 ; трек и плеер лежат здесь
 	define P_BALLS 3 
-	define P_PREBALLS 3 
 
 	; счетчики
 	define C_PART_MINIBALLS1 3800
-	define C_PART_MINIBALLS2 4200
-	define C_PART_MINIBALLS3 4600
+	define C_PART_MINIBALLS2 4100
+	define C_PART_MINIBALLS3 4400
 
 	org #6000
 
@@ -129,7 +127,6 @@ page1e	display /d, '[page 1] free: ', 65536 - $, ' (', $, ')'
 
 	define _page3 : page 3 : org #c000
 page3s	
-A_PART_PREBALLS_PACKED	incbin "build/part.preballs.bin.zx0"
 A_PART_BALLS_PACKED	incbin "build/part.balls.bin.zx0"
 page3e	display /d, '[page 3] free: ', 65536 - $, ' (', $, ')'
 

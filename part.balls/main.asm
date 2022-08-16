@@ -17,13 +17,21 @@ start
 
 	ld a,#46 : call lib.SetScreenAttr
 
+	ld b,32
+.preballsCycle	push bc
+	ld de, #4000
+	call A_PART_BALLS
+	halt
+	pop bc
+	djnz .preballsCycle
+
 	; Play balls on interrupts
 	ld hl,playBallsCycle
 	call interrStart
 
-	ld a,%01000010 : call A_PART_BALLS + 6
-	ld a,%01000011 : call A_PART_BALLS + 6
-	ld a,%01000111 : call A_PART_BALLS + 6
+	ld a,%01000010 : call A_PART_BALLS + 9
+	ld a,%01000011 : call A_PART_BALLS + 9
+	ld a,%01000111 : call A_PART_BALLS + 9
 
 	di : halt
 
@@ -31,8 +39,8 @@ playBallsCycle	ld a,#00
 	inc a : and #01 : ld(playBallsCycle+1),a
 	or a : ret z
 	ld de, #4000
-	call A_PART_BALLS + 3
-	jp A_PART_BALLS	
+	call A_PART_BALLS + 6
+	jp A_PART_BALLS + 3
 
 	; запуск нужной процедуры на прерываниях
 	; HL - адрес процедура

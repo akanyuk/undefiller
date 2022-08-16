@@ -2,7 +2,7 @@
 PROJECT_NAME = undefiller
 
 # Перечисление частей, которые должны собираться автоматически
-PARTS=part.preballs part.balls
+PARTS=part.balls
 
 NAME_SUFFIX = $(shell date +%Y%m%d)-$(shell git log --format="%h" -n 1)
 

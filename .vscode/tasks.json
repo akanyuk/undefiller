@@ -34,7 +34,10 @@
                 {
                         "label": "build all",
                         "command": "make",
-                        "group": "build"
+                        "group": {
+                                "kind": "build",
+                                "isDefault": true
+                        }
                 },
                 {
                         "label": "part.text",
@@ -47,17 +50,9 @@
                         "group": "build"
                 },
                 {
-                        "label": "part.preballs",
-                        "command": "make clean-part.preballs build/part.preballs.bin",
-                        "group": "build"
-                },
-                {
                         "label": "part.balls",
                         "command": "make clean-part.balls build/part.balls.bin",
-                        "group": {
-                                "kind": "build",
-                                "isDefault": true
-                        }
+                        "group": "build"
                 }
         ]
 }

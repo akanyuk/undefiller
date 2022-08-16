@@ -1,3 +1,4 @@
+	jp preBalls
 	jp NextFrame
 	jp DisplayFrame ; $+3 play frame 
 
@@ -7,4 +8,11 @@
 	include "miniballs/miniballs_player.asm"
 	endmodule
 
+	; balls player
 	include "player.asm"
+
+preBalls	module preballs
+	call DisplayFrame
+	jr NextFrame
+	include "preballs/player.asm"
+	endmodule
