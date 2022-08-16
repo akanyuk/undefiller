@@ -3,9 +3,9 @@
 	jp player2.NextFrame
 	jp player2.DisplayFrame
 	jp screenReplace
-
+	
 	; 'UNDEFINED' blinker
-	ld b,4
+blinker	ld b,4
 1	push bc
 	xor a : call lib.SetScreenAttr
 	dup 6
@@ -57,25 +57,44 @@
 
 	ret
 
-screenReplace	ld hl,UD_LOGO
-	ld de,#4840
+screenReplace	ld b,32
+.loop	push bc
+.movePixels	ld hl,BEFORE_SCR
+	ld de,#4000
 
-	ld a,32
-1	push af
+	ld a,192
+	ld bc,#0020
+	push hl
 	push de
-	ld bc,12
-	ldir
-	pop de
+1	push af
+	ld a,(hl) : ld(de),a
 	call lib.DownDE
-	pop af
-	dec a : jr nz,1b
+	add hl,bc
+	pop af : dec a : jr nz,1b
+	pop de : inc de : ld (.movePixels+4),de
+	pop hl : inc hl : ld (.movePixels+1),hl	
 
-	ld b,50 : halt : djnz $-1
+.moveAttrs	ld hl,BEFORE_SCR+#1800
+	ld de,#5800
 	
-	ld hl,BEFORE_SCR
-	jp lib.dispBinScrWithHalts
-BEFORE_SCR	incbin "res/start_scr.bin"
-UD_LOGO	incbin "res/udlogo.bin"
+	ld a,24
+	ld bc,#001f
+	push hl
+	push de	
+1	push af
+	ldi
+	add hl,bc
+	ex de,hl : add hl,bc : ex de,hl
+	pop af : dec a : jr nz,1b
+	pop de : inc de : ld (.moveAttrs+4),de
+	pop hl : inc hl : ld (.moveAttrs+1),hl	
+
+	halt
+	pop bc
+	djnz .loop
+	ret
+
+BEFORE_SCR	incbin "res/payalnik01.bin"
 
 	module player1
 	include "player.asm"

@@ -139,7 +139,7 @@ page3e	display /d, '[page 3] free: ', 65536 - $, ' (', $, ')'
 
 	define _page7 : page 7 : org #c000
 page7s	
-START_SCR	incbin "res/start_scr.bin"
+START_SCR	incbin "res/retroPC.bin"
 page7e	display /d, '[page 7] free: ', 65536 - $, ' (', $, ')'
 
 	include "src/builder.asm"

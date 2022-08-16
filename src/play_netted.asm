@@ -4,29 +4,24 @@
 	; initial screen
 	call A_PART_NETTED + 12
 
-	ld b,60 : halt : djnz $-1
+	ld b,200 : halt : djnz $-1
 
-	ld bc,#0244 : call nettedCycle
+	ld a,#02 : call nettedCycle
+	
+	call lib.ClearScreen
 
-	; удаление остатоков "undefined"
-	ld hl,#4880
-	ld de,#4881 
-	ld a,8
-1	push af
-	push hl
-	push de
-	ld (hl),0
-	ld b,9 : ldir
-	pop de : inc d
-	pop hl : inc h
-	pop af : dec a : jr nz, 1b
+	ld a,#02 : call nettedCycle
 
-	ld bc,#0243 : call nettedCycle
-	ld bc,#0242 : call nettedCycle
-	ld bc,#0201 : call nettedCycle
+	ld a,#42 : call lib.SetScreenAttr
+	ld a,#02 : call nettedCycle
 
-	ld bc,#0146 : call nettedCycle
-	ld bc,#0146 : call nettedCycle
+	ld a,#41 : call lib.SetScreenAttr
+	ld a,#02 : call nettedCycle
+
+	ld a,#46 : call lib.SetScreenAttr
+
+	ld a,#01 : call nettedCycle
+	ld a,#01 : call nettedCycle
 
 	ld b, 32
 1	push bc
@@ -34,8 +29,8 @@
 	pop bc
 	djnz 1b
 
-	ld bc,#0146 : call nettedCycle
-	ld bc,#0146 : call nettedCycle
+	ld a,#01 : call nettedCycle
+	ld a,#01 : call nettedCycle
 
 	ld b, 32
 1	push bc
@@ -43,15 +38,13 @@
 	pop bc
 	djnz 1b
 
-	ld bc,#0146 : call nettedCycle
-	ld bc,#0146 : call nettedCycle
+	ld a,#01 : call nettedCycle
+	ld a,#01 : call nettedCycle
 
 	jr playNettedDone
 
-	; b - speed (1 - fast, 2 - normal)
-	; c - color
-nettedCycle	ld a,b : ld (.spd+1),a
-	ld a,c : call lib.SetScreenAttr
+	; a - speed (1 - fast, 2 - normal)
+nettedCycle	ld (.spd+1),a
 	ld b,64
 1	push bc
 	ld de,#4000 
