@@ -14,3 +14,6 @@
                 ld b,100 : halt : djnz $-1
 	
                 call A_PART_GREETS + 6
+	ld b,50 : halt : djnz $-1
+
+	call A_PART_GREETS + 9

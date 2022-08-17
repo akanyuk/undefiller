@@ -1,7 +1,31 @@
 	jp preImage
 	jp main
-	; postImage
+	jp postImage
 
+	; multipass text
+	ld de, #4822
+	ld hl, POST_TEXT
+	ld b,6
+1	push bc
+	push de
+	call printHuman
+	inc hl
+	pop de
+	call nextLine
+	ld b,30 : halt : djnz $-1
+	pop bc 
+	djnz 1b
+	ret
+
+POST_SCR	incbin "res/multipass.bin"
+POST_TEXT	db "gfx:",0
+	db "shuran33",0
+	db "music:",0
+	db "n1k-o",0
+	db "code:",0
+	db "apeape",0
+
+postImage
 screenReplace	ld b,32
 .loop	push bc
 .movePixels	ld hl,POST_SCR
@@ -38,11 +62,8 @@ screenReplace	ld b,32
 	pop bc
 	djnz .loop
 	ret
-POST_SCR	incbin "res/multipass.bin"
 
-preImage
-	; screen after balls
-	ld hl,PRE_SCR
+preImage	ld hl,PRE_SCR
 	jp lib.DispBinOnInterrupts
 PRE_SCR	incbin "res/amiga.bin"
 

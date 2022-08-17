@@ -18,6 +18,7 @@ start
 	ld a,#44 : call lib.SetScreenAttr
 	call A_PART_GREETS + 3
 	call A_PART_GREETS + 6
+	call A_PART_GREETS + 9
 
 	di : halt
 
