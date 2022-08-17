@@ -1,78 +1,78 @@
 	; multimatograf
-	ld de,#4000 : call lib.PrintCursor
+	ld de,#40a0 : call lib.PrintCursor
 	ld b,20 : halt : djnz $-1
 
 	ld hl,TEXT1
-	ld de,#4001
-	call PrintHuman
-
-	ld b,10 : halt : djnz $-1
-
-	ld de,#4040 : call PrintWait
-	ld b,20 : halt : djnz $-1
-
-	ld hl,TEXT2
-	ld de,#4040 
-	call lib.PrintCpu
-
-	ld de,#40a0 : call lib.PrintCursor
-	ld b,100 : halt : djnz $-1
-
-	; dihalt
-	ld hl,TEXT3
 	ld de,#40a1
 	call PrintHuman
 
 	ld b,10 : halt : djnz $-1
 
-	ld de,#40e0 : call PrintWait
+	ld de,#40c1 : call PrintWait
+	ld b,20 : halt : djnz $-1
+
+	ld hl,TEXT2
+	ld de,#40c1 
+	call lib.PrintCpu
+
+	ld de,#4800 : call lib.PrintCursor
+	ld b,100 : halt : djnz $-1
+
+	; dihalt
+	ld hl,TEXT3
+	ld de,#4801
+	call PrintHuman
+
+	ld b,10 : halt : djnz $-1
+
+	ld de,#4821 : call PrintWait
 	ld b,20 : halt : djnz $-1
 
 	ld hl,TEXT4
-	ld de,#40e0 
+	ld de,#4821 
 	call lib.PrintCpu
 
-	ld de,#4840 : call lib.PrintCursor
+	ld de,#4860 : call lib.PrintCursor
 	ld b,100 : halt : djnz $-1
 
 	; cc
 	ld hl,TEXT5
-	ld de,#4841
+	ld de,#4861
 	call PrintHuman
 
 	ld b,10 : halt : djnz $-1
 
-	ld de,#4880 : call PrintWait
+	ld de,#4881 : call PrintWait
 	ld b,20 : halt : djnz $-1
 
 	ld hl,TEXT2
-	ld de,#4880 
+	ld de,#4881 
 	call lib.PrintCpu
 
-	ld de,#48e0 : call lib.PrintCursor
+	ld de,#48c0 : call lib.PrintCursor
 	ld b,100 : halt : djnz $-1
 
 	; cafe
 	ld hl,TEXT6
-	ld de,#48e1
+	ld de,#48c1
 	call PrintHuman
 
 	ld b,10 : halt : djnz $-1
 
-	ld de,#5020 : call PrintWait
+	ld de,#48e1 : call PrintWait
 	ld b,20 : halt : djnz $-1
 
-	ld hl,#5a20
-	ld de,#5a21
+	ld hl,#59e0
+	ld de,#59e1
 	ld (hl),#42
 	ld bc,#1f
 	ldir
 
 	ld hl,TEXT7
-	ld de,#5020 
+	ld de,#48e1
 	call lib.PrintCpu
 
-	ld de,#5080 : call lib.PrintCursor
+	ld de,#5020 : call lib.PrintCursor
 
 	ld b,150 : halt : djnz $-1
 
@@ -80,21 +80,16 @@
 	ld hl,#5800
 	ld de,#5801
 	ld (hl),0
-	ld bc,#0148
-1	ldi
+	ld bc,#0168
+1	dup 8
 	ldi
-	ldi
-	ldi
-	ldi
-	ldi
-	ldi
-	ldi
+	edup
 	halt
 	ld a, b : or c : jr nz, 1b
 
-	ld hl,#59e0
-	ld de,#59e1
-	ld bc,#00c0
+	ld hl,#59c0
+	ld de,#59c1
+	ld bc,#0100
 	ld (hl),0
 	ldir
 
@@ -111,16 +106,16 @@
 	ld (hl),l
 	ldir
 
-	ld de,#4840 
-	ld b,9
+	ld de,#4800 
+	ld b,#69
 1	push bc
 	ld a, " "
 	call lib.PrintChar_8x8
 	pop bc
 	djnz 1b
 
-	ld de,#48e0 
-	ld b,16
+	ld de,#48c0 
+	ld b,#40
 1	push bc
 	ld a, " "
 	call lib.PrintChar_8x8
@@ -130,7 +125,7 @@
 	ld b,50 : halt : djnz $-1
 
 	;  removing "chaos constructions"
-	ld de,#484a
+	ld de,#486a
 	ld b,21
 1	push bc
 	ld a, " "
@@ -164,13 +159,15 @@ PrintHuman 	ld a, (hl)
 	pop af
 	dec de
 	dec hl
-	ld b,6 : halt : djnz $-1
+	dup 4
+	halt
+	edup
 	call lib.PrintChar_8x8
 	jr PrintHuman
 
 PrintWait	ld b,9
 .PrintWait	push bc
-	ld b,20 : halt : djnz $-1
+	ld b,10 : halt : djnz $-1
 	ld a,"."
 	call lib.PrintChar_8x8
 	pop bc

@@ -4,7 +4,8 @@
 	; initial screen
 	call A_PART_NETTED + 12
 
-	ld b,200 : halt : djnz $-1
+	ld b,255 : halt : djnz $-1
+	ld b,100 : halt : djnz $-1
 
 	ld a,#02 : call nettedCycle
 	

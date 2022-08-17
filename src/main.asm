@@ -3,8 +3,8 @@
 	page 0
 
 	; define _DEBUG_ 1
-	; define _MUSIC_ 1
-	; define _INTRO_ 1
+	define _MUSIC_ 1
+	define _INTRO_ 1
 
 	; адресa частей
 A_PART_BALLS 	equ #7000
@@ -37,12 +37,14 @@ page0s	module lib
 	include "play_intro.asm"
 	endif 
 
-	include "play_start_screen.asm"
-
 	call musicStart
 	xor a : call lib.SetPage
 
-	ld b,210 : halt : djnz $-1
+	ld a, P_START_SCR : call lib.SetPage
+	ld hl,START_SCR
+	call lib.DispBinOnInterrupts
+	
+	ld b,170 : halt : djnz $-1
 	call lib.FadeScreenOnInterrupts
 
 	call lib.ClearScreen
@@ -51,7 +53,9 @@ page0s	module lib
 	call A_PART_TEXT
 	ld b,20 : halt : djnz $-1
 
+	xor a : call lib.SetPage
 	include "play_netted.asm"	
+
 	include "play_balls.asm"	
 	include "play_greets.asm"	
 
@@ -123,7 +127,7 @@ INTS_COUNTER	equ $+1
 	pop iy,ix,hl,de,bc,af
 	ei
 	ret
-
+	
 A_PART_TEXT	include "part.text/part.asm"
 A_PART_NETTED	include "part.netted/part.asm"
 
