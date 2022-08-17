@@ -1,72 +1,47 @@
-SAD_FILIN       equ #40d6
+                ld a, #44 : call lib.SetScreenAttr
+
+	ld de,#4001 : call lib.PrintCursor
+	ld b,20 : halt : djnz $-1
+	ld hl,DEMO_NAME1
+	ld de,#4002
+	call PrintHuman
+
+	ld b,30 : halt : djnz $-1
+
+	ld hl,DEMO_NAME1_BACK
+	ld de,#4022
+	call lib.PrintCpu
+
+	ld de,#4061 : call lib.PrintCursor
+	ld b,20 : halt : djnz $-1
+	ld hl,DEMO_NAME2
+	ld de,#4062
+	call PrintHuman
+
+	ld b,30 : halt : djnz $-1
+
+	ld hl,DEMO_NAME2_BACK
+	ld de,#4082
+	call lib.PrintCpu
+
+	ld de,#40c1 : call lib.PrintCursor
+	ld b,20 : halt : djnz $-1
+	ld hl,DEMO_NAME3
+	ld de,#40c2
+	call PrintHuman
+
+                ld b, 50 : halt : djnz $-1
 
 	ld a, P_START_SCR : call lib.SetPage
 	ld hl,START_SCR
 	call lib.DispBinOnInterrupts
 
-                ld b,30 : halt : djnz $-1
-
-                ld hl, START_NAMES
-                call plStartName
-
-                ld b,80 : halt : djnz $-1
-
-                call plStartEraser
-                ld b,10 : halt : djnz $-1
-                ld hl, START_NAMES + 12*8*3
-                call plStartName
-
-                ld b,80 : halt : djnz $-1
-
-                call plStartEraser
-                ld b,10 : halt : djnz $-1
-                ld hl, START_NAMES + 12*8*6
-                call plStartName
-
-                ld b,30 : halt : djnz $-1
-
-                ; happy filin
-                ld hl, SAD_FILIN
-                ld (hl), %00001000 : inc h
-                ld (hl), %00001000 : inc h
-                ld (hl), %00001000 : inc h : inc h
-                ld (hl), 0 : inc h
-                ld (hl), 0 : inc h
-                ld (hl), 0 
-
                 jp _playStartEnd
-
-plStartName     ld de, #40c1
-                ld bc, 12
-                ld a, 12
-1               push af
-                push hl
-                push de
-                ld a,16
-2               push af
-                ld a, (hl) : ld (de), a
-                call lib.DownDE
-                add hl, bc
-                pop af
-                dec a : jr nz, 2b
-                halt                
-                pop de : inc de
-                pop hl : inc hl
-                pop af : dec a : jr nz, 1b
-                ret
-
-plStartEraser   ld hl, #40c1 + 12
-                ld a, 13
-1               push af
-                push hl
-                ld b, 16
-2               ld (hl), 0
-                call lib.DownHL
-                djnz 2b
-                halt                
-                pop hl : dec hl
-                pop af : dec a : jr nz, 1b
-                ret
+DEMO_NAME1      db "UNDEFINED", 0                
+DEMO_NAME1_BACK db "Bad command", 0                
+DEMO_NAME2      db "UNDEFILIN", 0                
+DEMO_NAME2_BACK db "Bad command", 0                
+DEMO_NAME3      db "UNDEFILLER", 0                
 
 _playStartEnd
 

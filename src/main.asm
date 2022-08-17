@@ -3,8 +3,8 @@
 	page 0
 
 	; define _DEBUG_ 1
-	define _MUSIC_ 1
-	define _INTRO_ 1
+	; define _MUSIC_ 1
+	; define _INTRO_ 1
 
 	; адресa частей
 A_PART_BALLS 	equ #7000
@@ -145,7 +145,6 @@ page3e	display /d, '[page 3] free: ', 65536 - $, ' (', $, ')'
 	define _page7 : page 7 : org #c000
 page7s	
 START_SCR	incbin "res/start_screen.bin"
-START_NAMES	incbin "res/start_names.bin"
 A_PART_GREETS_PACKED
 	incbin "build/part.greets.bin.zx0"
 page7e	display /d, '[page 7] free: ', 65536 - $, ' (', $, ')'
