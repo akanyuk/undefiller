@@ -37,9 +37,7 @@ page0s	module lib
 	include "play_intro.asm"
 	endif 
 
-	ld a, P_START_SCR : call lib.SetPage
-	ld hl,START_SCR
-	call lib.DispBinOnInterrupts
+	include "play_start_screen.asm"
 
 	call musicStart
 	xor a : call lib.SetPage
@@ -135,7 +133,7 @@ page0e	display /d, '[page 0] free: ', #ffff - $, ' (', $, ')'
 page1s	
 A_PART_INTRO	include "part.intro/part.intro.asm"
 PT3PLAY	include "lib/PTxPlay.asm"
-	incbin "res/nq-underfiller-5.pt3"
+	incbin "res/nq-underfiller-6.pt3"
 page1e	display /d, '[page 1] free: ', 65536 - $, ' (', $, ')'
 
 	define _page3 : page 3 : org #c000
@@ -146,7 +144,8 @@ page3e	display /d, '[page 3] free: ', 65536 - $, ' (', $, ')'
 
 	define _page7 : page 7 : org #c000
 page7s	
-START_SCR	incbin "res/retroPC.bin"
+START_SCR	incbin "res/start_screen.bin"
+START_NAMES	incbin "res/start_names.bin"
 A_PART_GREETS_PACKED
 	incbin "build/part.greets.bin.zx0"
 page7e	display /d, '[page 7] free: ', 65536 - $, ' (', $, ')'
