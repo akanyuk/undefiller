@@ -16,7 +16,7 @@
 	call lib.PrintCpu
 
 	ld de,#4800 : call lib.PrintCursor
-	ld b,100 : halt : djnz $-1
+	ld b,30 : halt : djnz $-1
 
 	; dihalt
 	ld hl,TEXT3
@@ -33,7 +33,7 @@
 	call lib.PrintCpu
 
 	ld de,#4860 : call lib.PrintCursor
-	ld b,100 : halt : djnz $-1
+	ld b,30 : halt : djnz $-1
 
 	; cc
 	ld hl,TEXT5
@@ -50,7 +50,7 @@
 	call lib.PrintCpu
 
 	ld de,#48c0 : call lib.PrintCursor
-	ld b,100 : halt : djnz $-1
+	ld b,30 : halt : djnz $-1
 
 	; cafe
 	ld hl,TEXT6
@@ -74,7 +74,7 @@
 
 	ld de,#5020 : call lib.PrintCursor
 
-	ld b,150 : halt : djnz $-1
+	ld b,30 : halt : djnz $-1
 
 	; begin slow clean
 	ld hl,#5800
@@ -122,7 +122,7 @@
 	pop bc
 	djnz 1b
 
-	ld b,50 : halt : djnz $-1
+	ld b,30 : halt : djnz $-1
 
 	;  removing "chaos constructions"
 	ld de,#486a
@@ -132,8 +132,6 @@
 	call lib.PrintChar_8x8
 	pop bc
 	djnz 1b
-
-	ld a,#44 : call lib.SetScreenAttr
 
 	ret
 
@@ -159,7 +157,7 @@ PrintHuman 	ld a, (hl)
 	pop af
 	dec de
 	dec hl
-	dup 4
+	dup 2
 	halt
 	edup
 	call lib.PrintChar_8x8
@@ -167,7 +165,9 @@ PrintHuman 	ld a, (hl)
 
 PrintWait	ld b,9
 .PrintWait	push bc
-	ld b,10 : halt : djnz $-1
+	dup 5
+	halt
+	edup
 	ld a,"."
 	call lib.PrintChar_8x8
 	pop bc
