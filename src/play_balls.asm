@@ -15,11 +15,13 @@
 	pop bc
 	djnz .preballsCycle
 
+	ld b, 50 : halt : djnz $-1
+
 	; Play balls on interrupts
 	ld hl,playBallsCycle
 	call interrStart
 
-	ld b, 100 : halt : djnz $-1
+	ld b, 250 : halt : djnz $-1
 	
 	ld hl, TRANS_PIPELINE
 	ld b, (TRANS_PIPELINE_END - TRANS_PIPELINE)/3
@@ -32,30 +34,22 @@
 	ld b, a : halt : djnz $-1	
 	pop bc : djnz 1b
 
-	ld b, 100 : halt : djnz $-1
-	
 	call interrStop
 	jr playBallsDone
 TRANS_PIPELINE	
-	db %01000101, 02, 1
-	db %01000101, 03, 10
+	db %01000101, 02, 50
+	db %01000101, 03, 50
 
-	db %01000011, 00, 1
-	db %01000011, 01, 10
+	db %01000011, 00, 50
+	db %01000011, 01, 50
 
 	db %01000010, 04, 1
 	db %01000100, 04, 1
 	db %01000100, 05, 1
-	db %01000110, 05, 10
-
+	db %01000110, 05, 1
 	db %01000010, 02, 1
-	db %01000011, 03, 10
-
-	db %01000111, 00, 1
-	db %01000001, 01, 10
-
-	db %01000110, 04, 1
-	db %01000010, 05, 10
+	db %01000111, 01, 1
+	db %01000001, 00, 1
 TRANS_PIPELINE_END
 
 

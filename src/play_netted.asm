@@ -4,9 +4,9 @@
 	; initial screen
 	call A_PART_NETTED + 12
 
-	ld b,255 : halt : djnz $-1
-	ld b,100 : halt : djnz $-1
+1	ld de, WAIT_PAYALNIK_END : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
 
+	ld a,#02 : call nettedCycle
 	ld a,#02 : call nettedCycle
 	
 	call lib.ClearScreen
@@ -19,27 +19,38 @@
 	ld a,#41 : call lib.SetScreenAttr
 	ld a,#02 : call nettedCycle
 
+	ld a,#03 : call lib.SetScreenAttr
+
+	ld a,#01 : call nettedCycle
+	ld a,#01 : call nettedCycle
+
+	ld b, 32
+1	push bc
+	call A_PART_NETTED + 6
+	pop bc
+	djnz 1b
+
+	ld a,#01 : call nettedCycle
+	ld a,#01 : call nettedCycle
+
+	ld b, 32
+1	push bc
+	call A_PART_NETTED + 6
+	pop bc
+	djnz 1b
+
+	ld a,#01 : call nettedCycle
+	ld a,#43 : call lib.SetScreenAttr
+	ld a,#01 : call nettedCycle
+
+	ld a,#04 : call lib.SetScreenAttr
+	ld a,#01 : call nettedCycle
+	ld a,#44 : call lib.SetScreenAttr
+	ld a,#01 : call nettedCycle
+
+	ld a,#06 : call lib.SetScreenAttr
+	ld a,#01 : call nettedCycle
 	ld a,#46 : call lib.SetScreenAttr
-
-	ld a,#01 : call nettedCycle
-	ld a,#01 : call nettedCycle
-
-	ld b, 32
-1	push bc
-	call A_PART_NETTED + 6
-	pop bc
-	djnz 1b
-
-	ld a,#01 : call nettedCycle
-	ld a,#01 : call nettedCycle
-
-	ld b, 32
-1	push bc
-	call A_PART_NETTED + 6
-	pop bc
-	djnz 1b
-
-	ld a,#01 : call nettedCycle
 	ld a,#01 : call nettedCycle
 
 	jr playNettedDone

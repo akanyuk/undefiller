@@ -4,7 +4,7 @@
 
 	; define _DEBUG_ 1
 	define _MUSIC_ 1
-	; define _INTRO_ 1
+	define _INTRO_ 1
 
 	; адресa частей
 A_PART_BALLS 	equ #7000
@@ -16,7 +16,10 @@ A_PART_GREETS 	equ #7000
 	define P_BALLS 3 
 	define P_GREETS 7
 
-	define WAIT_PAYALNIK 1200
+	define WAIT_PAYALNIK_END 1665
+	define WAIT_BALLS_START 3110
+	define WAIT_GREETS 5030
+	define WAIT_5_ELEMENT 6020
 	
 	org #6000
 
@@ -47,17 +50,17 @@ page0s	module lib
 	ld a,#44 : call lib.SetScreenAttr
 
 	call A_PART_TEXT
-	ld b,20 : halt : djnz $-1
+	ld b,40 : halt : djnz $-1
 
 	ld a,#44 : call lib.SetScreenAttr
 
 	xor a : call lib.SetPage
 	include "play_netted.asm"	
 
+1	ld de, WAIT_BALLS_START : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
+
 	include "play_balls.asm"	
 	include "play_greets.asm"	
-
-	ld b,200 : halt : djnz $-1
 
 	; STOP HERE
 	ifdef _MUSIC_

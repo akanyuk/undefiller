@@ -125,7 +125,7 @@ greetsLine	push de
 	push hl
 	call lib.PrintCursor	
 	dec e
-	ld b,30 : halt : djnz $-1	
+	ld b,15 : halt : djnz $-1	
 	ld hl, .gstrt
 	call printHuman
 	pop hl
@@ -224,6 +224,10 @@ printHumanFast 	ld a, (hl)
 	pop af
 	dec de
 	dec hl
+	push af
+phf	ld a, #00 : inc a : and #03 : ld (phf+1), a
+	or a : jr nz, $+3
 	halt
+	pop af
 	call lib.PrintChar_8x8
 	jr printHumanFast

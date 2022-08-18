@@ -5,15 +5,15 @@
 	call lib.Depack
 
 	call A_PART_GREETS
-                ld b,255 : halt : djnz $-1
+
+1	ld de, WAIT_GREETS : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
 
 	call lib.FadeScreenOnInterrupts
 	ld a,#44 : call lib.SetScreenAttr
 	
                 call A_PART_GREETS + 3
-                ld b,100 : halt : djnz $-1
+
+1	ld de, WAIT_5_ELEMENT : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
 	
                 call A_PART_GREETS + 6
-	ld b,50 : halt : djnz $-1
-
 	call A_PART_GREETS + 9
