@@ -19,19 +19,45 @@
 	ld hl,playBallsCycle
 	call interrStart
 
-1	ld de, C_MINIBALLS1 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
-	ld a,%01000010 : call A_PART_BALLS + 9
+	ld b, 100 : halt : djnz $-1
+	
+	ld hl, TRANS_PIPELINE
+	ld b, (TRANS_PIPELINE_END - TRANS_PIPELINE)/3
+1	push bc 
+	ld a, (hl) : inc hl : ld c, a
+	ld a, (hl) : inc hl
+	push hl
+	call A_PART_BALLS + 9
+	pop hl : ld a, (hl) : inc hl
+	ld b, a : halt : djnz $-1	
+	pop bc : djnz 1b
 
-1	ld de, C_MINIBALLS2 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
-	ld a,%01000011 : call A_PART_BALLS + 9
-
-1	ld de, C_MINIBALLS3 : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
-	ld a,%01000111 : call A_PART_BALLS + 9
-
-1	ld de, C_AFTER_BALLS : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
-
+	ld b, 100 : halt : djnz $-1
+	
 	call interrStop
 	jr playBallsDone
+TRANS_PIPELINE	
+	db %01000101, 02, 1
+	db %01000101, 03, 10
+
+	db %01000011, 00, 1
+	db %01000011, 01, 10
+
+	db %01000010, 04, 1
+	db %01000100, 04, 1
+	db %01000100, 05, 1
+	db %01000110, 05, 10
+
+	db %01000010, 02, 1
+	db %01000011, 03, 10
+
+	db %01000111, 00, 1
+	db %01000001, 01, 10
+
+	db %01000110, 04, 1
+	db %01000010, 05, 10
+TRANS_PIPELINE_END
+
 
 	; part.balls: main
 playBallsCycle	ld a,#00

@@ -2,7 +2,7 @@
 
 	page 0
 	
-	define _DEBUG_ 1
+	; define _DEBUG_ 1
 
 	define A_PART_BALLS #7000
 
@@ -31,12 +31,42 @@ start
 	ld hl,playBallsCycle
 	call interrStart
 
-	; ld a,%01000010 : call A_PART_BALLS + 9
-	; ld a,%01000011 : call A_PART_BALLS + 9
-	ld a,%01000111 : call A_PART_BALLS + 9
+	ld hl, TRANS_PIPELINE
+	ld b, (TRANS_PIPELINE_END - TRANS_PIPELINE)/3
+1	push bc 
+	ld a, (hl) : inc hl : ld c, a
+	ld a, (hl) : inc hl
+	push hl
+	call A_PART_BALLS + 9
+	pop hl : ld a, (hl) : inc hl
+	ld b, a : halt : djnz $-1	
+	pop bc : djnz 1b
 
+	ld b, 100 : halt : djnz $-1
 	call interrStop
 	di : halt
+
+TRANS_PIPELINE	
+	db %01000101, 02, 1
+	db %01000101, 03, 10
+
+	db %01000011, 00, 1
+	db %01000011, 01, 10
+
+	db %01000010, 04, 1
+	db %01000100, 04, 1
+	db %01000100, 05, 1
+	db %01000110, 05, 10
+
+	db %01000010, 02, 1
+	db %01000011, 03, 10
+
+	db %01000111, 00, 1
+	db %01000001, 01, 10
+
+	db %01000110, 04, 1
+	db %01000010, 05, 10
+TRANS_PIPELINE_END
 
 playBallsCycle	ld a,#00
 	inc a : and #01 : ld(playBallsCycle+1),a

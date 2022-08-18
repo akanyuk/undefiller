@@ -10,17 +10,11 @@
 A_PART_BALLS 	equ #7000
 A_PART_GREETS 	equ #7000
 
-	define P_INTRO 1 ; "OUTSIDERS" intro
+	define P_INTRO 4 ; "OUTSIDERS" intro
 	define P_TRACK 1 ; трек и плеер лежат здесь
 	define P_START_SCR 7
 	define P_BALLS 3 
 	define P_GREETS 7
-
-	; счетчики
-	define C_MINIBALLS1 4500
-	define C_MINIBALLS2 4700
-	define C_MINIBALLS3 4900
-	define C_AFTER_BALLS 5100
 
 	org #6000
 
@@ -38,7 +32,7 @@ page0s	module lib
 	endif 
 
 	call musicStart
-	xor a : call lib.SetPage
+	ld hl, 0 : ld (INTS_COUNTER), hl
 
 	ld a, P_START_SCR : call lib.SetPage
 	ld hl,START_SCR
@@ -135,9 +129,8 @@ page0e	display /d, '[page 0] free: ', #ffff - $, ' (', $, ')'
 
 	define _page1 : page 1 : org #c000
 page1s	
-A_PART_INTRO	include "part.intro/part.intro.asm"
 PT3PLAY	include "lib/PTxPlay.asm"
-	incbin "res/nq-underfiller-6.pt3"
+	incbin "res/nq-underfiller.pt3"
 page1e	display /d, '[page 1] free: ', 65536 - $, ' (', $, ')'
 
 	define _page3 : page 3 : org #c000
@@ -145,6 +138,11 @@ page3s
 A_PART_BALLS_PACKED
 	incbin "build/part.balls.bin.zx0"
 page3e	display /d, '[page 3] free: ', 65536 - $, ' (', $, ')'
+
+	define _page4 : page 4 : org #c000
+page4s	
+A_PART_INTRO	include "part.intro/part.intro.asm"
+page4e	display /d, '[page 4] free: ', 65536 - $, ' (', $, ')'
 
 	define _page7 : page 7 : org #c000
 page7s	

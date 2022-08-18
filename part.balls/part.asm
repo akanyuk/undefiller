@@ -1,12 +1,9 @@
 	jp preBalls
-	jp NextFrame
-	jp DisplayFrame 
+	jp balls.NextFrame
+	jp balls.DisplayFrame 
 
 	; miniballs
-miniBalls	module miniballs
-	include "miniballs/miniballs.asm"
-	include "miniballs/miniballs_player.asm"
-	endmodule
+miniBalls	include "miniballs/miniballs.asm"
 
 preBalls	module preballs
 	call DisplayFrame
@@ -15,4 +12,6 @@ preBalls	module preballs
 	endmodule
 
 	; balls player
+	module balls
 	include "balls/player.asm"
+	endmodule
