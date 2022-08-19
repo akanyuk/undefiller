@@ -87,21 +87,9 @@
 	halt
 	ld a, b : or c : jr nz, 1b
 
-	ld hl,#59c0
-	ld de,#59c1
-	ld bc,#0100
-	ld (hl),0
-	ldir
-
 	; really cleanup
 	ld hl,#4000
 	ld de,#4001
-	ld bc,#07ff
-	ld (hl),l
-	ldir
-
-	ld hl,#5000
-	ld de,#5001
 	ld bc,#07ff
 	ld (hl),l
 	ldir
@@ -115,18 +103,37 @@
 	djnz 1b
 
 	ld de,#48c0 
-	ld b,#40
+	ld b,#20
 1	push bc
 	ld a, " "
 	call lib.PrintChar_8x8
 	pop bc
 	djnz 1b
 
-	ld b,30 : halt : djnz $-1
+	ld de,#5020
+	ld b,#20
+1	push bc
+	ld a, " "
+	call lib.PrintChar_8x8
+	pop bc
+	djnz 1b
+
+	ld b,15 : halt : djnz $-1
 
 	;  removing "chaos constructions"
 	ld de,#486a
 	ld b,21
+1	push bc
+	ld a, " "
+	call lib.PrintChar_8x8
+	pop bc
+	djnz 1b
+
+	ld b,15 : halt : djnz $-1
+	
+	;  removing "DANGER! BUGULMA!"
+	ld de,#48e0
+	ld b,#20
 1	push bc
 	ld a, " "
 	call lib.PrintChar_8x8

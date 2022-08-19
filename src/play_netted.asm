@@ -8,20 +8,38 @@
 
 	ld a,#02 : call nettedCycle
 	ld a,#02 : call nettedCycle
+	ld a,#02 : call nettedCycle
 	
 	call lib.ClearScreen
+	dup 5
+	halt
+	edup
 
 	ld a,#02 : call nettedCycle
+	ld a,#02 : call nettedCycle
 
+	call lib.ClearScreen
 	ld a,#42 : call lib.SetScreenAttr
+
 	ld a,#02 : call nettedCycle
 
 	ld a,#41 : call lib.SetScreenAttr
 	ld a,#02 : call nettedCycle
 
+	xor a : call lib.SetScreenAttr
+	call lib.ClearScreen
+
+	ld b, 12 : halt : djnz $-1
+
+	ld a,%00111000 : call lib.SetScreenAttr
+	ld a, 7 : out (#fe), a
+	halt
+	halt
+	xor a : out (#fe), a
 	ld a,#03 : call lib.SetScreenAttr
 
-	ld a,#01 : call nettedCycle
+	ld b, 4 : halt : djnz $-1
+
 	ld a,#01 : call nettedCycle
 
 	ld b, 32
@@ -39,17 +57,15 @@
 	pop bc
 	djnz 1b
 
-	ld a,#01 : call nettedCycle
 	ld a,#43 : call lib.SetScreenAttr
 	ld a,#01 : call nettedCycle
 
-	ld a,#04 : call lib.SetScreenAttr
-	ld a,#01 : call nettedCycle
 	ld a,#44 : call lib.SetScreenAttr
 	ld a,#01 : call nettedCycle
 
-	ld a,#06 : call lib.SetScreenAttr
+	ld a,#47 : call lib.SetScreenAttr
 	ld a,#01 : call nettedCycle
+
 	ld a,#46 : call lib.SetScreenAttr
 	ld a,#01 : call nettedCycle
 
