@@ -4,7 +4,7 @@
 
 	; define _DEBUG_ 1
 	define _MUSIC_ 1
-	; define _INTRO_ 1
+	define _INTRO_ 1
 
 	; адресa частей
 A_PART_BALLS 	equ #7000

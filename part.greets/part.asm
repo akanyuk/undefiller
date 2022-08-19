@@ -1,9 +1,33 @@
-	jp preImage
-	jp main
-	jp postImage
+	jp amigaImage
+	jp greetsMain
+	jp multipassImage
+	jp multipassText
+	jp amigaShow
 
-	; multipass text
-	ld de, #4842
+	; AMIGA hide
+	ld hl, NO_AMIGA_BIN
+	jr $+5
+	; AAMIGAAA!
+amigaShow	ld hl, AMIGA_ONLY_BIN
+	ld de, #4000 + 19
+	ld b,48
+.amigaLoop	push bc
+	push de
+	ld bc,#0008
+	ldir
+	pop de
+	call lib.DownDE
+	pop bc
+	djnz .amigaLoop
+	ret
+NO_AMIGA_BIN	incbin "res/no-amiga.bin"	
+AMIGA_ONLY_BIN	incbin "res/amiga-only.bin"	
+
+amigaImage	ld hl,PRE_SCR
+	jp lib.DispBinOnInterrupts
+PRE_SCR	incbin "res/amiga.bin"
+
+multipassText	ld de, #4842
 	ld hl, POST_TEXT
 	ld b,5
 1	push bc
@@ -17,14 +41,13 @@
 	djnz 1b
 	ret
 
-POST_SCR	incbin "res/multipass.bin"
 POST_TEXT	db "shuran33",0
 	db "n1k-o",0
 	db "apeape",0
 	db "--------",0
 	db "2022",0
 
-postImage
+multipassImage
 screenReplace	ld b,32
 .loop	push bc
 .movePixels	ld hl,POST_SCR
@@ -61,12 +84,10 @@ screenReplace	ld b,32
 	pop bc
 	djnz .loop
 	ret
+POST_SCR	incbin "res/multipass.bin"
 
-preImage	ld hl,PRE_SCR
-	jp lib.DispBinOnInterrupts
-PRE_SCR	incbin "res/amiga.bin"
 
-main	ld de, #4000
+greetsMain	ld de, #4000
 
 	ld hl, GREETS
 	ld b,8
