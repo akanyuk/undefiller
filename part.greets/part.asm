@@ -174,7 +174,7 @@ GREETS2	db "undefine (uris, toughthrough,", 0
 	db "dman, dimidrol, devstratum,", 0
 	db "blastoff, art-top, aggressor)", 0
 
-GREETS3	db "undefine (quiet, speccy.pl,", 0
+GREETS3	db "undefine (target, speccy.pl,", 0
 	db "serzhsoft, q-bone, nedopc,", 0
 	db "megus, mayhem, marquee design,", 0
 	db "joker, invaders, hooy-program,", 0

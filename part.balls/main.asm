@@ -23,7 +23,7 @@ start
 .preballsCycle	push bc
 	ld de, #4000
 	call A_PART_BALLS
-	halt
+	; halt
 	pop bc
 	djnz .preballsCycle
 
@@ -47,26 +47,23 @@ start
 	call interrStop
 	di : halt
 
+	define BLUE	 %01000001
+	define RED  	 %01000010
+	define MAGENTA   %01000011
+	define GREEN  	 %01000100
+	define LIGHTBLUE %01000101
+	define YELLOW 	 %01000110
+	define WHITE 	 %01000111
+
 TRANS_PIPELINE	
-	db %01000101, %01000101, 02, 1
-	db %01000101, %01000101, 03, 10
-
-	db %01000011, %01000101, 00, 1
-	db %01000011, %01000101, 01, 10
-
-	db %01000010, %01000101, 04, 1
-	db %01000100, %01000101, 04, 1
-	db %01000100, %01000101, 05, 1
-	db %01000110, %01000101, 05, 10
-
-	db %01000010, %01000101, 02, 1
-	db %01000011, %01000101, 03, 10
-
-	db %01000111, %01000101, 00, 1
-	db %01000001, %01000101, 01, 10
-
-	db %01000110, %01000101, 04, 1
-	db %01000010, %01000101, 05, 10
+	db BLUE, RED, 		07, 1
+	db MAGENTA, GREEN, 	06, 1
+	db LIGHTBLUE, YELLOW, 	05, 1
+	db WHITE, BLUE, 	04, 1
+	db RED, MAGENTA,	03, 1
+	db GREEN, LIGHTBLUE, 	02, 1
+	db YELLOW, WHITE, 	01, 1
+	db BLUE, RED, 		00, 1
 TRANS_PIPELINE_END
 
 playBallsCycle	ld a,#00

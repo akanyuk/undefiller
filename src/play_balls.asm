@@ -25,11 +25,13 @@
 
 	ld b, 115 : halt : djnz $-1
 
-	ld a, 7 : out (#fe), a
+	ld a, 6 : out (#fe), a
+	ld a,%00110000 : call lib.SetScreenAttr
 	dup 5
 	halt
 	edup
 	xor a : out (#fe), a
+	ld a,#46 : call lib.SetScreenAttr
 
 	; Play balls on interrupts
 	ld hl,playBallsCycle
@@ -39,6 +41,51 @@
 	
 	ld hl, TRANS_PIPELINE
 	ld b, (TRANS_PIPELINE_END - TRANS_PIPELINE)/4
+	call transPipeline
+
+1	ld de, WAIT_BALLS_MORE : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
+
+	ld b, 5
+1	push bc
+	ld a, 7 : out (#fe), a
+	ld a,%00111000 : call lib.SetScreenAttr
+	halt
+	halt
+	halt
+	xor a : out (#fe), a
+	ld a,#47 : call lib.SetScreenAttr
+	halt
+	halt
+	halt
+	pop bc
+	djnz 1b
+
+	ld hl, TRANS_PIPELINE2
+	ld b, (TRANS_PIPELINE2_END - TRANS_PIPELINE2)/4
+	call transPipeline
+
+	call interrStop
+	jr playBallsDone
+TRANS_PIPELINE	
+	db MAGENTA, MAGENTA, 02, 40
+	db RED, BLUE, 03, 40
+
+	db GREEN, WHITE, 00, 40
+	db LIGHTBLUE, MAGENTA, 01, 1
+
+TRANS_PIPELINE_END
+
+
+TRANS_PIPELINE2	
+	db RED, BLUE, 04, 5
+	db MAGENTA, YELLOW, 05, 5
+	db BLUE, RED, 06, 5
+	db GREEN, LIGHTBLUE, 07, 5
+	db YELLOW, MAGENTA, 02, 5
+	db BLUE, LIGHTBLUE, 01, 5
+TRANS_PIPELINE2_END
+
+transPipeline
 1	push bc 
 	ld a, (hl) : inc hl : ld c, a
 	ld a, (hl) : inc hl : ld b, a
@@ -48,25 +95,7 @@
 	pop hl : ld a, (hl) : inc hl
 	ld b, a : halt : djnz $-1	
 	pop bc : djnz 1b
-
-	call interrStop
-	jr playBallsDone
-TRANS_PIPELINE	
-	db MAGENTA, MAGENTA, 02, 40
-	db RED, BLUE, 03, 40
-
-	db GREEN, WHITE, 00, 40
-	db LIGHTBLUE, MAGENTA, 01, 82
-
-	db RED, BLUE, 04, 5
-	db MAGENTA, WHITE, 04, 5
-	db BLUE, RED, 05, 5
-	db GREEN, LIGHTBLUE, 03, 5
-	db RED, MAGENTA, 02, 5
-	db BLUE, LIGHTBLUE, 01, 5
-	; db WHITE, GREEN, 00, 1
-TRANS_PIPELINE_END
-
+	ret
 
 	; part.balls: main
 playBallsCycle	ld a,#00

@@ -1,4 +1,4 @@
-SCENE_CYCLES 	equ 72
+SCENE_CYCLES 	equ 64
 
 	ld hl, DATA
 	ld de, DATA_CURRENT
