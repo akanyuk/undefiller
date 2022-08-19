@@ -14,6 +14,7 @@ endif
 
 all: build
 
+# build: clean-oart.greets $(PARTS:%=build/%.bin.zx0) ## Default: build project
 build: $(PARTS:%=build/%.bin.zx0) ## Default: build project
 	@printf "\033[32mBuilding '$(PROJECT_NAME)'\033[0m\n"
 

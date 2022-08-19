@@ -4,6 +4,16 @@
 	ld de, A_PART_GREETS
 	call lib.Depack
 
+1	ld de, WAIT_AMIGA : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b
+
+	ld a,%00111000 : call lib.SetScreenAttr
+	ld a, 7 : out (#fe), a
+	dup 5
+	halt
+	edup
+	xor a : out (#fe), a
+	call lib.SetScreenAttr
+
 	call A_PART_GREETS
 
 1	ld de, WAIT_GREETS : ld hl, (INTS_COUNTER) : sbc hl, de : jr c, 1b

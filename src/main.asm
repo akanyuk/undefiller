@@ -18,7 +18,9 @@ A_PART_GREETS 	equ #7000
 
 	define WAIT_PAYALNIK_END 1665
 	define WAIT_BALLS_START 3110
-	define WAIT_GREETS 5030
+	define WAIT_BALLS_TRANS 3570
+	define WAIT_AMIGA 4560
+	define WAIT_GREETS 5020
 	define WAIT_5_ELEMENT 6020
 	
 	org #6000
@@ -128,6 +130,8 @@ INTS_COUNTER	equ $+1
 	pop iy,ix,hl,de,bc,af
 	ei
 	ret
+
+	display /d, '[page 0] bytes before overlap at #7000: ', #7000 - $
 	
 A_PART_TEXT	include "part.text/part.asm"
 A_PART_NETTED	include "part.netted/part.asm"

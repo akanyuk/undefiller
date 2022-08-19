@@ -88,8 +88,7 @@ screenReplace	ld b,32
 	pop af : dec a : jr nz,1b
 	pop de : inc de : ld (.moveAttrs+4),de
 	pop hl : inc hl : ld (.moveAttrs+1),hl	
-
-	halt
+	ld b, 6 : halt : djnz $-1	
 	pop bc
 	djnz .loop
 	ret

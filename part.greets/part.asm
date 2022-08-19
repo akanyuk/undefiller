@@ -3,9 +3,9 @@
 	jp postImage
 
 	; multipass text
-	ld de, #4822
+	ld de, #4842
 	ld hl, POST_TEXT
-	ld b,6
+	ld b,5
 1	push bc
 	push de
 	call printHuman
@@ -18,12 +18,11 @@
 	ret
 
 POST_SCR	incbin "res/multipass.bin"
-POST_TEXT	db "gfx:",0
-	db "shuran33",0
-	db "music:",0
+POST_TEXT	db "shuran33",0
 	db "n1k-o",0
-	db "code:",0
 	db "apeape",0
+	db "--------",0
+	db "2022",0
 
 postImage
 screenReplace	ld b,32
@@ -78,7 +77,7 @@ main	ld de, #4000
 
 	call nextLine
 
-	ld b,30 : halt : djnz $-1	
+	ld b,50 : halt : djnz $-1	
 
 	; "I CAN DO IT ALL NIGHT"
 	push de
@@ -100,7 +99,7 @@ main	ld de, #4000
 	call nextLine
 	call nextLine
 
-	ld b,150 : halt : djnz $-1
+	ld b,120 : halt : djnz $-1
 
 	call lib.PrintCursor	
 	dec e
@@ -143,7 +142,7 @@ GREETS	db "stardust", 0
 	db "sibcrew", 0
 	db "shiru", 0
 	db "rmda", 0
-	db "lom", 0
+	db "life on mars", 0
 	db "errorsoft", 0
 	db "demarche", 0
 	db "bfox", 0
@@ -175,7 +174,7 @@ GREETS2	db "undefine (uris, toughthrough,", 0
 	db "dman, dimidrol, devstratum,", 0
 	db "blastoff, art-top, aggressor)", 0
 
-GREETS3	db "undefine (target, speccy.pl,", 0
+GREETS3	db "undefine (quiet, speccy.pl,", 0
 	db "serzhsoft, q-bone, nedopc,", 0
 	db "megus, mayhem, marquee design,", 0
 	db "joker, invaders, hooy-program,", 0
